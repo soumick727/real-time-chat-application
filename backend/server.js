@@ -1,13 +1,21 @@
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const app = express();
 require('colors'); // For colored console logs
 const dotenv = require('dotenv');
+const userRoutes = require('./routes/userRoutes');
 dotenv.config({path: './config.env'});
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+
+//routes for authentication
+app.use('/api/user', userRoutes);
+
+
 
 //MongoDB connection
 mongoose.connect(process.env.MONGODB_URL).then(() => {
