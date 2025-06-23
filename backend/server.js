@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const app = express();
 require('colors'); // For colored console logs
 const dotenv = require('dotenv');
-const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoute');
+const userRoutes = require('./routes/userRoute');
+const chatRoutes = require('./routes/chatRoute');
 dotenv.config({path: './config.env'});
 
 app.use(cors());
@@ -13,8 +15,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 //routes for authentication
+app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
-
+app.use('/api/chat', chatRoutes);
 
 
 //MongoDB connection
